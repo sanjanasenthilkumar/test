@@ -1,9 +1,7 @@
-name: Scott Test 2
+name: Docker
 
-on:
-  push:
-    branches:
-      - master
+on: push
+  
 
 jobs:
   build:
