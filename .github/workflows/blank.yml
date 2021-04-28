@@ -7,27 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
-      actions: read
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [javascript]
-     
-    # Specify the container in which actions will run
-    container:
-      image: ghcr.io/sanjanasenthilkumar/github-actions-for-packages/tic-tac-toe:sha-7d23c90
-      
-      
+      actions: read  
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-   
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+    - uses: azure/container-scan@v0
       with:
-        languages: ${{ matrix.language }}
+       image-name: ghcr.io/sanjanasenthilkumar/github-actions-for-packages/tic-tac-toe:sha-7d23c90
    
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      
+
+
