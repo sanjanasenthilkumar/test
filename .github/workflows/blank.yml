@@ -1,17 +1,24 @@
-name: Docker CD
+name: Scott Test 2
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
-  build-secure-and-push:
+  build:
+    name: Build and Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tf_version: [ "0.14.2" ]
+      fail-fast: true
+
     steps:
-        - uses: Azure/container-scan@v0
-          with:
-            image-name: ghcr.io/sanjanasenthilkumar/github-actions-for-packages/tic-tac-toe:${{ github.sha }}
+      - name: Checkout
+        uses: actions/checkout@v2
 
-
-   
-      
-
-
+      - name: Scan Docker Image
+        uses: azure/container-scan@v0
+        with:
+          image-name: ghcr.io/sanjanasenthilkumar/github-actions-for-packages/tic-tac-toe:sha-7d23c90
