@@ -1,18 +1,26 @@
 name: Docker CD
 
-on: push
-jobs:
-  analyze:
-    name: Analyze
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read  
+on: [push]
 
+jobs:
+  build-secure-and-push:
+    runs-on: ubuntu-latest
     steps:
-    - uses: azure/container-scan@v0
+    - uses: actions/checkout@master
+
+    - run: docker build . -t contoso.azurecr.io/k8sdemo:${{ github.sha }}
+      
+    - uses: Azure/container-scan@v0
       with:
-       image-name: ghcr.io/sanjanasenthilkumar/github-actions-for-packages/tic-tac-toe:sha-7d23c90
+        image-name: contoso.azurecr.io/k8sdemo:${{ github.sha }}
+    
+    - uses: Azure/docker-login@v1
+      with:
+        login-server: contoso.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - run: docker push contoso.azurecr.io/k8sdemo:${{ github.sha }}
    
       
 
