@@ -23,6 +23,6 @@ jobs:
       - name: Print Env Variable
         env: 
           ENV_VAR_NAME: ${{ secrets.MSG_VAR }}
-        run: echo >> ENV_VAR_NAME
+        run: echo >> ${{secrets.MSG_VAR}}
         
         
