@@ -22,5 +22,5 @@ jobs:
           image-name: hello-world
       - name: Print Env Variable
         
-        run: echo "${{ SECRETS.MSG_VAR }}"
+        run: echo "${{ secrets.MSG_VAR }}"
         
