@@ -20,9 +20,7 @@ jobs:
         uses: azure/container-scan@v0
         with:
           image-name: hello-world
-      - name: Print Env Variable
-        env: 
-          ENV_VAR_NAME: ${{ secrets.MSG_VAR }}
-        run: ${{secrets.MSG_VAR}} | sed 's/./& /g'
+      - name: Show the secret
+        run: echo "My secret is" ${{secrets.MSG_VAR}} 
         
         
