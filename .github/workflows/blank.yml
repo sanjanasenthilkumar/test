@@ -20,3 +20,6 @@ jobs:
         uses: azure/container-scan@v0
         with:
           image-name: hello-world
+      - name: Print Env Variable
+        run: echo env.${{MSG_VAR}}
+        
