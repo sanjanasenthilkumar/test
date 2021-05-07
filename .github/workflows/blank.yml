@@ -21,6 +21,7 @@ jobs:
         with:
           image-name: hello-world
       - name: Print Env Variable
+        env: 
+          ENV_VAR_NAME: ${{ secrets.MSG_VAR }}
         
-        run: echo "${{ secrets.MSG_VAR }}"
         
